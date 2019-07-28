@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 //import logo from './logo.svg';
 import './App.css';
+import CardList from './components/cardList/CardList';
 
 class App extends Component {
   constructor(){
@@ -26,18 +27,25 @@ class App extends Component {
   }
 
   render() {
-    console.log({...this.state})
     const {monsters,loading} = this.state;
 
-    return (
-      <div className="App">
-        {monsters.map(monster => {
-          return (
-            <p key={monster.id}>{loading ? <span>Loading....</span> : monster.name}</p>
-          )
-        })}
-      </div>
-    )
+    if(loading){
+      return <h1 style={{textAlign: 'center'}}>Loading...</h1>
+    }
+    else{
+      return (
+        <div className="App">
+          <CardList name='Richard'>
+            {monsters.map(monster => {
+              return (
+                <p key={monster.id}>{monster.name}</p>
+              )
+            })}
+          </CardList>
+        </div>
+      )
+    }
+
   }
 }
 export default App;
