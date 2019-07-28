@@ -41,6 +41,7 @@ class App extends Component {
     else{
       return (
         <div className="App">
+          <h1>Monsters Rolodex</h1>
           <Search 
             search={search} 
             handleChange={e => this.setState({search: e.target.value})} 
