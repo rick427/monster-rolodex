@@ -28,8 +28,6 @@ class App extends Component {
      });
   }
 
-  handleChange = e => this.setState({search: e.target.value})
-
   render() {
     const {monsters, loading, search} = this.state;
 
@@ -43,7 +41,10 @@ class App extends Component {
     else{
       return (
         <div className="App">
-          <Search search={search} handleChange={this.handleChange} />
+          <Search 
+            search={search} 
+            handleChange={e => this.setState({search: e.target.value})} 
+          />
           <CardList monsters={filteredMonsters}/>
         </div>
       )
