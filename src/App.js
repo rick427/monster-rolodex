@@ -8,7 +8,8 @@ class App extends Component {
     super();
     this.state = {
       monsters: [],
-      loading: false
+      loading: false,
+      search: ''
     };
   }
 
@@ -27,7 +28,7 @@ class App extends Component {
   }
 
   render() {
-    const {monsters,loading} = this.state;
+    const {monsters,loading,search} = this.state;
 
     if(loading){
       return <h1 style={{textAlign: 'center'}}>Loading...</h1>
@@ -35,13 +36,14 @@ class App extends Component {
     else{
       return (
         <div className="App">
-          <CardList name='Richard'>
-            {monsters.map(monster => {
-              return (
-                <p key={monster.id}>{monster.name}</p>
-              )
-            })}
-          </CardList>
+          <input 
+             type="text" 
+             name='search' 
+             value={search} 
+             onChange={e => this.setState({search: e.target.value})} 
+             placeholder="Search for a monster" 
+          />
+          <CardList monsters={monsters}/>
         </div>
       )
     }
