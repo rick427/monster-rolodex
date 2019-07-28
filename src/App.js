@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 //import logo from './logo.svg';
 import './App.css';
 import CardList from './components/cardList/CardList';
+import Search from './components/searchBox/Search';
 
 class App extends Component {
   constructor(){
@@ -27,8 +28,14 @@ class App extends Component {
      });
   }
 
+  handleChange = e => this.setState({search: e.target.value})
+
   render() {
-    const {monsters,loading,search} = this.state;
+    const {monsters, loading, search} = this.state;
+
+    const filteredMonsters = monsters.filter(monster => 
+      monster.name.toLowerCase().includes(search.toLowerCase())
+    )
 
     if(loading){
       return <h1 style={{textAlign: 'center'}}>Loading...</h1>
@@ -36,14 +43,8 @@ class App extends Component {
     else{
       return (
         <div className="App">
-          <input 
-             type="text" 
-             name='search' 
-             value={search} 
-             onChange={e => this.setState({search: e.target.value})} 
-             placeholder="Search for a monster" 
-          />
-          <CardList monsters={monsters}/>
+          <Search search={search} handleChange={this.handleChange} />
+          <CardList monsters={filteredMonsters}/>
         </div>
       )
     }
